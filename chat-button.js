@@ -4,20 +4,45 @@
 function addChatButtonStyles() {
     const style = document.createElement('style');
     style.innerHTML = `
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
         #chat-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 600px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #ff4974;
             border-radius: 30px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            padding: 0 20px;
             cursor: pointer;
             z-index: 1000;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        #chat-button:hover {
-            background-color: #0056b3;
+
+        #chat-button img {
+            height: 40px;
+        }
+
+        #chat-button span {
+            flex-grow: 1;
+            text-align: center;
+            color: #ff4974;
+            font-size: 16px;
         }
     `;
     document.head.appendChild(style);
@@ -27,7 +52,16 @@ function addChatButtonStyles() {
 function addChatButton() {
     const button = document.createElement('div');
     button.id = 'chat-button';
-    button.innerText = '💬 Chat with us';
+    
+    const logo = document.createElement('img');
+    logo.src = 'https://path-to-your-logo.png'; // 이미지 URL을 실제 URL로 대체하세요
+    logo.alt = 'Logo';
+
+    const text = document.createElement('span');
+    text.innerText = '메시지를 입력해주세요.';
+
+    button.appendChild(logo);
+    button.appendChild(text);
     button.onclick = function() {
         openChat();
     };
