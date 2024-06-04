@@ -78,17 +78,29 @@ function addWaitButton() {
 // 대기 버튼을 클릭했을 때 채팅 버튼으로 변환하는 함수
 function expandButton() {
     const waitButton = document.getElementById('wait-button');
+    const chatButton = document.getElementById('chat-button');
+
+    // 대기 버튼 애니메이션
     waitButton.style.transform = 'translateX(-50%)';
     waitButton.style.left = '50%';
     waitButton.style.right = 'initial';
     waitButton.style.width = '820px';
     waitButton.style.borderRadius = '20px';
-    
+
+    // 대기 버튼이 중앙으로 이동한 후 채팅 버튼으로 변환
     setTimeout(() => {
         waitButton.style.display = 'none';
-        const chatButton = document.getElementById('chat-button');
-        chatButton.style.width = '820px';
         chatButton.style.opacity = '1';
+        chatButton.style.width = '820px';
+
+        const chatImage = chatButton.querySelector('img');
+        const chatText = chatButton.querySelector('span');
+
+        // 이미지와 텍스트를 나중에 나타나게 함
+        setTimeout(() => {
+            chatImage.style.opacity = '1';
+            chatText.style.opacity = '1';
+        }, 500);
     }, 500);
 }
 
