@@ -22,7 +22,7 @@ function addChatButtonStyles() {
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
-            right: 80px;
+            right: 20px;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.5s ease-in-out;
@@ -46,6 +46,7 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
+            transition: all 0.5s ease-in-out;
         }
 
         #chat-input-container img {
@@ -290,4 +291,15 @@ function sendMessage() {
 // 외부 영역을 클릭할 때 채팅 창 닫기
 document.addEventListener('click', function(event) {
     const chatContainer = document.getElementById('chat-container');
-    if (chatContainer.style.display === 'block' && !chatContainer.contains(event.target) && event.target
+    if (chatContainer.style.display === 'block' && !chatContainer.contains(event.target) && event.target.id !== 'chat-input-container' && event.target.id !== 'send-button') {
+        toggleChatContainer(false);
+    }
+});
+
+// DOM이 로드되었을 때 버튼과 스타일을 추가합니다
+document.addEventListener('DOMContentLoaded', function() {
+    addChatButtonStyles();
+    addWaitButton();
+    addChatInputContainer();
+    addChatContainer();
+});
