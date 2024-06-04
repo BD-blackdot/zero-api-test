@@ -22,7 +22,7 @@ function addChatButtonStyles() {
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
-            right: 60px;
+            right: 80px;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.5s ease-in-out;
@@ -71,17 +71,36 @@ function addChatButtonStyles() {
             outline: none;
         }
 
+        #chat-hint {
+            color: #8B8B8D;
+            font-size: 16px;
+            margin-left: auto;
+            opacity: 1; /* 초기 힌트 메시지 보임 */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #send-button {
+            display: none; /* 초기 전송 버튼 숨김 */
+            background-color: #E75B7F;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
         #chat-container {
             display: none; /* 초기에는 숨김 */
             position: fixed;
             bottom: 100px; /* chat-button 위에 위치 */
             left: 50%;
             transform: translateX(-50%);
-            width: 820px;
+            width: 500px;
             height: 400px;
             background-color: white;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            border-radius: 20px;
             padding: 20px;
             z-index: 1000;
             overflow-y: auto;
@@ -97,29 +116,6 @@ function addChatButtonStyles() {
             align-items: center;
             border-top: 1px solid #ddd;
             padding-top: 10px;
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            border: none;
-            padding: 10px;
-            border-radius: 20px;
-            background-color: #f0f0f0;
-            margin-right: 10px;
-        }
-
-        #chat-input:focus {
-            outline: none;
-        }
-
-        #send-button {
-            background-color: #E75B7F;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-left: 10px;
         }
 
         .chat-message {
@@ -210,6 +206,10 @@ function addChatInputContainer() {
     input.placeholder = '메시지를 입력해주세요.';
     input.id = 'chat-input';
 
+    const hint = document.createElement('span');
+    hint.id = 'chat-hint';
+    hint.innerText = '메시지를 입력하세요';
+
     const sendButton = document.createElement('button');
     sendButton.id = 'send-button';
     sendButton.innerText = '전송';
@@ -219,11 +219,16 @@ function addChatInputContainer() {
 
     input.addEventListener('input', function() {
         const logo = document.getElementById('chat-logo');
+        const hint = document.getElementById('chat-hint');
+        const sendButton = document.getElementById('send-button');
         logo.style.display = 'none';
+        hint.style.display = 'none';
+        sendButton.style.display = 'block';
     });
 
     container.appendChild(logo);
     container.appendChild(input);
+    container.appendChild(hint);
     container.appendChild(sendButton);
 
     document.body.appendChild(container);
