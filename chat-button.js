@@ -218,10 +218,6 @@ function addChatInputContainer() {
         sendMessage();
     };
 
-    input.addEventListener('click', function() {
-
-    });
-
     container.addEventListener('click', function() {
         const chatHint = document.getElementById('chat-hint');
         const chatInput = document.getElementById('chat-input');
@@ -249,10 +245,21 @@ function addChatInputContainer() {
 // 채팅 창을 토글하는 함수
 function toggleChatContainer(open) {
     const chatContainer = document.getElementById('chat-container');
+    const chatInputContainer = document.getElementById('chat-input-container');
+    const logo = document.getElementById('chat-logo');
+    const hint = document.getElementById('chat-hint');
+    const input = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+
     if (open) {
         chatContainer.style.display = 'block';
     } else {
         chatContainer.style.display = 'none';
+        // chat-input-container 초기 상태로 복원
+        logo.style.display = 'block';
+        hint.style.display = 'block';
+        input.style.display = 'none';
+        sendButton.style.display = 'none';
     }
 }
 
