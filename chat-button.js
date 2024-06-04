@@ -54,7 +54,7 @@ function addChatButton() {
     button.id = 'chat-button';
     
     const logo = document.createElement('img');
-    logo.src = 'logo.png'; // 이미지 URL을 실제 URL로 대체하세요
+    logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png'; // 이미지 URL을 실제 URL로 대체하세요
     logo.alt = 'Logo';
 
     const text = document.createElement('span');
