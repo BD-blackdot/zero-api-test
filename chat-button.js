@@ -60,6 +60,75 @@ function addChatButtonStyles() {
             color: #8B8B8D;
             font-size: 16px;
         }
+
+        #chat-container {
+            display: none; /* 초기에는 숨김 */
+            position: fixed;
+            bottom: 100px; /* chat-button 위에 위치 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 400px;
+            background-color: white;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        #chat-messages {
+            height: calc(100% - 60px); /* 텍스트 입력 창을 위한 공간 확보 */
+            overflow-y: auto;
+        }
+
+        #chat-input-container {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            margin-right: 10px;
+        }
+
+        #chat-input:focus {
+            outline: none;
+        }
+
+        #send-button {
+            background-color: #E75B7F;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .chat-message.user {
+            background-color: #E75B7F;
+            color: white;
+            text-align: right;
+        }
+
+        .chat-message.bot {
+            background-color: #eee;
+            color: #333;
+            text-align: left;
+        }
     `;
     document.head.appendChild(style);
 }
@@ -118,14 +187,78 @@ function addChatButton() {
     button.appendChild(logo);
     button.appendChild(text);
     button.onclick = function() {
-        openChat();
+        toggleChatContainer();
     };
     document.body.appendChild(button);
 }
 
-// 채팅 창을 여는 함수
-function openChat() {
-    alert('Chat window will open here.');
+// 채팅 창을 토글하는 함수
+function toggleChatContainer() {
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer.style.display === 'none') {
+        chatContainer.style.display = 'block';
+    } else {
+        chatContainer.style.display = 'none';
+    }
+}
+
+// 채팅 창을 추가하는 함수
+function addChatContainer() {
+    const container = document.createElement('div');
+    container.id = 'chat-container';
+
+    const messages = document.createElement('div');
+    messages.id = 'chat-messages';
+
+    const inputContainer = document.createElement('div');
+    inputContainer.id = 'chat-input-container';
+
+    const input = document.createElement('input');
+    input.id = 'chat-input';
+    input.type = 'text';
+    input.placeholder = '메시지를 입력해주세요.';
+
+    const sendButton = document.createElement('button');
+    sendButton.id = 'send-button';
+    sendButton.innerText = '전송';
+    sendButton.onclick = function() {
+        sendMessage();
+    };
+
+    inputContainer.appendChild(input);
+    inputContainer.appendChild(sendButton);
+
+    container.appendChild(messages);
+    container.appendChild(inputContainer);
+
+    document.body.appendChild(container);
+}
+
+// 메시지를 전송하는 함수
+function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const messageText = input.value;
+    if (messageText.trim() !== '') {
+        const messages = document.getElementById('chat-messages');
+
+        // 사용자 메시지 추가
+        const userMessage = document.createElement('div');
+        userMessage.className = 'chat-message user';
+        userMessage.innerText = messageText;
+        messages.appendChild(userMessage);
+
+        // 입력 필드 비우기
+        input.value = '';
+
+        // 봇 응답 추가 (여기서는 간단히 응답을 추가하지만 실제로는 서버와 통신 필요)
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chat-message bot';
+        botMessage.innerText = '봇 응답: ' + messageText;
+        messages.appendChild(botMessage);
+
+        // 스크롤을 최신 메시지로 이동
+        messages.scrollTop = messages.scrollHeight;
+    }
 }
 
 // DOM이 로드되었을 때 버튼과 스타일을 추가합니다
@@ -133,4 +266,5 @@ document.addEventListener('DOMContentLoaded', function() {
     addChatButtonStyles();
     addWaitButton();
     addChatButton();
+    addChatContainer();
 });
