@@ -46,7 +46,6 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
-            transition: all 0.5s ease-in-out;
         }
 
         #chat-input-container img {
@@ -140,6 +139,18 @@ function addChatButtonStyles() {
             color: #333;
             text-align: left;
         }
+
+        #close-chat {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #E75B7F;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     `;
     document.head.appendChild(style);
 }
@@ -212,9 +223,9 @@ function addChatInputContainer() {
 }
 
 // 채팅 창을 토글하는 함수
-function toggleChatContainer() {
+function toggleChatContainer(open) {
     const chatContainer = document.getElementById('chat-container');
-    if (chatContainer.style.display === 'none') {
+    if (open) {
         chatContainer.style.display = 'block';
     } else {
         chatContainer.style.display = 'none';
@@ -229,12 +240,21 @@ function addChatContainer() {
     const messages = document.createElement('div');
     messages.id = 'chat-messages';
 
+    const closeButton = document.createElement('button');
+    closeButton.id = 'close-chat';
+    closeButton.innerText = '닫기';
+    closeButton.onclick = function() {
+        toggleChatContainer(false);
+    };
+
     container.appendChild(messages);
+    container.appendChild(closeButton);
 
     document.body.appendChild(container);
 }
 
 // 메시지를 전송하는 함수
+let chatOpened = false;
 function sendMessage() {
     const input = document.getElementById('chat-input');
     const messageText = input.value;
@@ -259,15 +279,15 @@ function sendMessage() {
         // 스크롤을 최신 메시지로 이동
         messages.scrollTop = messages.scrollHeight;
 
-        // 채팅 창을 표시
-        toggleChatContainer();
+        // 채팅 창을 처음 열기
+        if (!chatOpened) {
+            toggleChatContainer(true);
+            chatOpened = true;
+        }
     }
 }
 
-// DOM이 로드되었을 때 버튼과 스타일을 추가합니다
-document.addEventListener('DOMContentLoaded', function() {
-    addChatButtonStyles();
-    addWaitButton();
-    addChatInputContainer();
-    addChatContainer();
-});
+// 외부 영역을 클릭할 때 채팅 창 닫기
+document.addEventListener('click', function(event) {
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer.style.display === 'block' && !chatContainer.contains(event.target) && event.target
