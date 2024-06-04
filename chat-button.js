@@ -24,7 +24,7 @@ function addChatButtonStyles() {
             background-color: white;
             border: 1px solid #E75B7F;
             border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 5px 5px 50px 10px #c7c7c7;
             padding: 0 20px;
             cursor: pointer;
             z-index: 1000;
