@@ -53,7 +53,6 @@ function addChatButtonStyles() {
             width: 96px;
             height: 25.9px;
             opacity: 0; /* 이미지 초기 투명도 */
-            transition: opacity 0.5s ease-in-out;
         }
 
         #chat-input-container input {
