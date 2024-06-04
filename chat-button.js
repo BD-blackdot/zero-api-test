@@ -28,11 +28,10 @@ function addChatButtonStyles() {
             transition: all 0.5s ease-in-out;
         }
 
-        #chat-button {
+        #chat-input-container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 0px;
+            width: 0px; /* 초기 너비 설정 */
             height: 60px;
             background-color: white;
             border: 1px solid #E75B7F;
@@ -47,18 +46,29 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
+            transition: all 0.5s ease-in-out;
         }
 
-        #chat-button img {
-            width: 96px; /* 너비 설정 */
-            height: 25.9px; /* 높이 설정 */
+        #chat-input-container img {
+            width: 30px;
+            height: 30px;
+            opacity: 0; /* 이미지 초기 투명도 */
+            transition: opacity 0.5s ease-in-out;
         }
 
-        #chat-button span {
+        #chat-input-container input {
             flex-grow: 1;
-            text-align: right;
-            color: #8B8B8D;
-            font-size: 16px;
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: white;
+            margin-left: 10px;
+            opacity: 0; /* 텍스트 초기 투명도 */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #chat-input-container input:focus {
+            outline: none;
         }
 
         #chat-container {
@@ -82,7 +92,7 @@ function addChatButtonStyles() {
             overflow-y: auto;
         }
 
-        #chat-input-container {
+        #chat-input-area {
             display: flex;
             align-items: center;
             border-top: 1px solid #ddd;
@@ -146,7 +156,7 @@ function addWaitButton() {
 // 대기 버튼을 클릭했을 때 채팅 버튼으로 변환하는 함수
 function expandButton() {
     const waitButton = document.getElementById('wait-button');
-    const chatButton = document.getElementById('chat-button');
+    const chatInputContainer = document.getElementById('chat-input-container');
 
     // 대기 버튼 애니메이션
     waitButton.style.transform = 'translateX(-50%)';
@@ -158,11 +168,11 @@ function expandButton() {
     // 대기 버튼이 중앙으로 이동한 후 채팅 버튼으로 변환
     setTimeout(() => {
         waitButton.style.display = 'none';
-        chatButton.style.opacity = '1';
-        chatButton.style.width = '820px';
+        chatInputContainer.style.opacity = '1';
+        chatInputContainer.style.width = '820px';
 
-        const chatImage = chatButton.querySelector('img');
-        const chatText = chatButton.querySelector('span');
+        const chatImage = chatInputContainer.querySelector('img');
+        const chatInput = chatInputContainer.querySelector('input');
 
         // 이미지와 텍스트를 나중에 나타나게 함
         setTimeout(() => {
@@ -175,21 +185,23 @@ function expandButton() {
 // 채팅 버튼을 추가하는 함수
 function addChatButton() {
     const button = document.createElement('div');
-    button.id = 'chat-button';
+    button.id = 'chat-input-container';
     
     const logo = document.createElement('img');
     logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png';
     logo.alt = 'Logo';
 
-    const text = document.createElement('span');
-    text.innerText = '메시지를 입력해주세요.';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = '메시지를 입력해주세요.';
+    input.id = 'chat-input';
 
-    button.appendChild(logo);
-    button.appendChild(text);
-    button.onclick = function() {
+    container.appendChild(logo);
+    container.appendChild(input);
+    container.onclick = function() {
         toggleChatContainer();
     };
-    document.body.appendChild(button);
+    document.body.appendChild(container);
 }
 
 // 채팅 창을 토글하는 함수
@@ -210,8 +222,8 @@ function addChatContainer() {
     const messages = document.createElement('div');
     messages.id = 'chat-messages';
 
-    const inputContainer = document.createElement('div');
-    inputContainer.id = 'chat-input-container';
+    const inputArea = document.createElement('div');
+    inputArea.id = 'chat-input-area';
 
     const input = document.createElement('input');
     input.id = 'chat-input';
@@ -225,11 +237,11 @@ function addChatContainer() {
         sendMessage();
     };
 
-    inputContainer.appendChild(input);
-    inputContainer.appendChild(sendButton);
+    inputArea.appendChild(input);
+    inputArea.appendChild(sendButton);
 
     container.appendChild(messages);
-    container.appendChild(inputContainer);
+    container.appendChild(inputArea);
 
     document.body.appendChild(container);
 }
@@ -265,6 +277,6 @@ function sendMessage() {
 document.addEventListener('DOMContentLoaded', function() {
     addChatButtonStyles();
     addWaitButton();
-    addChatButton();
+    addChatInputContainer();
     addChatContainer();
 });
