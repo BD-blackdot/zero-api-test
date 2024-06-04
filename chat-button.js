@@ -15,11 +15,24 @@ function addChatButtonStyles() {
             background-color: #f0f0f0;
         }
 
+        #wait-button {
+            width: 60px;
+            height: 60px;
+            background-color: #E75B7F;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.5s ease-in-out;
+        }
+
         #chat-button {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 820px;
+            width: 0px;
             height: 60px;
             background-color: white;
             border: 1px solid #E75B7F;
@@ -32,6 +45,9 @@ function addChatButtonStyles() {
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
         }
 
         #chat-button img {
@@ -49,13 +65,40 @@ function addChatButtonStyles() {
     document.head.appendChild(style);
 }
 
+// 대기 버튼을 추가하는 함수
+function addWaitButton() {
+    const button = document.createElement('div');
+    button.id = 'wait-button';
+    button.onclick = function() {
+        expandButton();
+    };
+    document.body.appendChild(button);
+}
+
+// 대기 버튼을 클릭했을 때 채팅 버튼으로 변환하는 함수
+function expandButton() {
+    const waitButton = document.getElementById('wait-button');
+    waitButton.style.transform = 'translateX(-50%)';
+    waitButton.style.left = '50%';
+    waitButton.style.right = 'initial';
+    waitButton.style.width = '820px';
+    waitButton.style.borderRadius = '20px';
+    
+    setTimeout(() => {
+        waitButton.style.display = 'none';
+        const chatButton = document.getElementById('chat-button');
+        chatButton.style.width = '820px';
+        chatButton.style.opacity = '1';
+    }, 500);
+}
+
 // 채팅 버튼을 추가하는 함수
 function addChatButton() {
     const button = document.createElement('div');
     button.id = 'chat-button';
     
     const logo = document.createElement('img');
-    logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png'; // 이미지 URL을 실제 URL로 대체하세요
+    logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png';
     logo.alt = 'Logo';
 
     const text = document.createElement('span');
@@ -77,5 +120,6 @@ function openChat() {
 // DOM이 로드되었을 때 버튼과 스타일을 추가합니다
 document.addEventListener('DOMContentLoaded', function() {
     addChatButtonStyles();
+    addWaitButton();
     addChatButton();
 });
