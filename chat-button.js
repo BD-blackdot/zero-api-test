@@ -186,7 +186,6 @@ function expandButton() {
 
         // 이미지와 입력 창을 나중에 나타나게 함
         setTimeout(() => {
-            chatImage.style.opacity = '1';
             chatHint.style.opacity = '1';
         }, 500);
     }, 500);
@@ -219,14 +218,7 @@ function addChatInputContainer() {
     };
 
     input.addEventListener('click', function() {
-        const logo = document.getElementById('chat-logo');
-        const hint = document.getElementById('chat-hint');
-        const sendButton = document.getElementById('send-button');
-        logo.style.display = 'none';
-        hint.style.display = 'none';
-        input.style.display = 'block';
-        input.style.opacity = '1';
-        sendButton.style.display = 'block';
+
     });
 
     container.addEventListener('click', function() {
@@ -235,6 +227,14 @@ function addChatInputContainer() {
         chatHint.style.display = 'none';
         chatInput.style.display = 'block';
         chatInput.focus();
+        const logo = document.getElementById('chat-logo');
+        const hint = document.getElementById('chat-hint');
+        const sendButton = document.getElementById('send-button');
+        logo.style.display = 'none';
+        hint.style.display = 'none';
+        input.style.display = 'block';
+        input.style.opacity = '1';
+        sendButton.style.display = 'block';
     });
 
     container.appendChild(logo);
