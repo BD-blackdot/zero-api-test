@@ -258,6 +258,9 @@ function sendMessage() {
 
         // 스크롤을 최신 메시지로 이동
         messages.scrollTop = messages.scrollHeight;
+
+        // 채팅 창을 표시
+        toggleChatContainer();
     }
 }
 
