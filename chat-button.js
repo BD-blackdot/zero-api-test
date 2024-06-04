@@ -63,6 +63,7 @@ function addChatButtonStyles() {
             border-radius: 20px;
             background-color: white;
             margin-left: 10px;
+            display: none; /* 초기 입력 필드 숨김 */
             opacity: 0; /* 텍스트 초기 투명도 */
             transition: opacity 0.5s ease-in-out;
         }
@@ -96,7 +97,7 @@ function addChatButtonStyles() {
             bottom: 100px; /* chat-button 위에 위치 */
             left: 50%;
             transform: translateX(-50%);
-            width: 500px;
+            width: 820px;
             height: 400px;
             background-color: white;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -182,11 +183,12 @@ function expandButton() {
 
         const chatImage = chatInputContainer.querySelector('img');
         const chatInput = chatInputContainer.querySelector('input');
+        const chatHint = chatInputContainer.querySelector('#chat-hint');
 
         // 이미지와 입력 창을 나중에 나타나게 함
         setTimeout(() => {
             chatImage.style.opacity = '1';
-            chatInput.style.opacity = '1';
+            chatHint.style.opacity = '1';
         }, 500);
     }, 500);
 }
@@ -223,7 +225,17 @@ function addChatInputContainer() {
         const sendButton = document.getElementById('send-button');
         logo.style.display = 'none';
         hint.style.display = 'none';
+        input.style.display = 'block';
+        input.style.opacity = '1';
         sendButton.style.display = 'block';
+    });
+
+    container.addEventListener('click', function() {
+        const chatHint = document.getElementById('chat-hint');
+        const chatInput = document.getElementById('chat-input');
+        chatHint.style.display = 'none';
+        chatInput.style.display = 'block';
+        chatInput.focus();
     });
 
     container.appendChild(logo);
