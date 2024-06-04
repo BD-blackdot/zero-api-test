@@ -186,7 +186,7 @@ function expandButton() {
 
         // 이미지와 입력 창을 나중에 나타나게 함
         setTimeout(() => {
-            chatImage.style.opacity = '0';
+            chatImage.style.opacity = '1';
             chatHint.style.opacity = '1';
         }, 500);
     }, 500);
