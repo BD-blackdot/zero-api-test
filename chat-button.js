@@ -218,7 +218,7 @@ function addChatInputContainer() {
         sendMessage();
     };
 
-    input.addEventListener('input', function() {
+    input.addEventListener('click', function() {
         const logo = document.getElementById('chat-logo');
         const hint = document.getElementById('chat-hint');
         const sendButton = document.getElementById('send-button');
