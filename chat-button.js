@@ -47,7 +47,6 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
-            transition: all 0.5s ease-in-out;
         }
 
         #chat-button img {
