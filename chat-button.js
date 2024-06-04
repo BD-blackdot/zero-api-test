@@ -196,6 +196,18 @@ function addChatInputContainer() {
     input.placeholder = '메시지를 입력해주세요.';
     input.id = 'chat-input';
 
+    const inputArea = document.createElement('div');
+    inputArea.id = 'chat-input-area';
+
+    const sendButton = document.createElement('button');
+    sendButton.id = 'send-button';
+    sendButton.innerText = '전송';
+    sendButton.onclick = function() {
+        sendMessage();
+    };
+
+    container.appendChild(inputArea);
+    inputArea.appendChild(sendButton);
     container.appendChild(logo);
     container.appendChild(input);
     container.onclick = function() {
@@ -222,26 +234,7 @@ function addChatContainer() {
     const messages = document.createElement('div');
     messages.id = 'chat-messages';
 
-    const inputArea = document.createElement('div');
-    inputArea.id = 'chat-input-area';
-
-    const input = document.createElement('input');
-    input.id = 'chat-input';
-    input.type = 'text';
-    input.placeholder = '메시지를 입력해주세요.';
-
-    const sendButton = document.createElement('button');
-    sendButton.id = 'send-button';
-    sendButton.innerText = '전송';
-    sendButton.onclick = function() {
-        sendMessage();
-    };
-
-    inputArea.appendChild(input);
-    inputArea.appendChild(sendButton);
-
     container.appendChild(messages);
-    container.appendChild(inputArea);
 
     document.body.appendChild(container);
 }
