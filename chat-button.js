@@ -119,6 +119,7 @@ function addChatButtonStyles() {
             padding: 10px 15px;
             border-radius: 20px;
             cursor: pointer;
+            margin-left: 10px;
         }
 
         .chat-message {
@@ -196,9 +197,6 @@ function addChatInputContainer() {
     input.placeholder = '메시지를 입력해주세요.';
     input.id = 'chat-input';
 
-    const inputArea = document.createElement('div');
-    inputArea.id = 'chat-input-area';
-
     const sendButton = document.createElement('button');
     sendButton.id = 'send-button';
     sendButton.innerText = '전송';
@@ -206,13 +204,10 @@ function addChatInputContainer() {
         sendMessage();
     };
 
-    container.appendChild(inputArea);
-    inputArea.appendChild(sendButton);
     container.appendChild(logo);
     container.appendChild(input);
-    container.onclick = function() {
-        toggleChatContainer();
-    };
+    container.appendChild(sendButton);
+
     document.body.appendChild(container);
 }
 
