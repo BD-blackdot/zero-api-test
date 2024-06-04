@@ -22,7 +22,7 @@ function addChatButtonStyles() {
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
-            right: 80px;
+            right: 60px;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.5s ease-in-out;
@@ -46,6 +46,7 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
+            
         }
 
         #chat-input-container img {
@@ -202,6 +203,7 @@ function addChatInputContainer() {
     const logo = document.createElement('img');
     logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png';
     logo.alt = 'Logo';
+    logo.id = 'chat-logo';
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -214,6 +216,11 @@ function addChatInputContainer() {
     sendButton.onclick = function() {
         sendMessage();
     };
+
+    input.addEventListener('input', function() {
+        const logo = document.getElementById('chat-logo');
+        logo.style.display = 'none';
+    });
 
     container.appendChild(logo);
     container.appendChild(input);
@@ -290,7 +297,8 @@ function sendMessage() {
 // 외부 영역을 클릭할 때 채팅 창 닫기
 document.addEventListener('click', function(event) {
     const chatContainer = document.getElementById('chat-container');
-    if (chatContainer.style.display === 'block' && !chatContainer.contains(event.target) && event.target.id !== 'chat-input-container' && event.target.id !== 'send-button') {
+    const chatInputContainer = document.getElementById('chat-input-container');
+    if (chatContainer.style.display === 'block' && !chatContainer.contains(event.target) && !chatInputContainer.contains(event.target)) {
         toggleChatContainer(false);
     }
 });
