@@ -19,11 +19,11 @@ function addChatButtonStyles() {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 600px;
+            width: 820px;
             height: 60px;
             background-color: white;
-            border: 2px solid #ff4974;
-            border-radius: 30px;
+            border: 1px solid #E75B7F;
+            border-radius: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             padding: 0 20px;
             cursor: pointer;
@@ -40,8 +40,8 @@ function addChatButtonStyles() {
 
         #chat-button span {
             flex-grow: 1;
-            text-align: center;
-            color: #ff4974;
+            text-align: right;
+            color: #8B8B8D;
             font-size: 16px;
         }
     `;
@@ -54,7 +54,7 @@ function addChatButton() {
     button.id = 'chat-button';
     
     const logo = document.createElement('img');
-    logo.src = 'https://path-to-your-logo.png'; // 이미지 URL을 실제 URL로 대체하세요
+    logo.src = 'logo.png'; // 이미지 URL을 실제 URL로 대체하세요
     logo.alt = 'Logo';
 
     const text = document.createElement('span');
