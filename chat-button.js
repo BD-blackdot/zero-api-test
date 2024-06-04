@@ -77,7 +77,7 @@ function addChatButtonStyles() {
             bottom: 100px; /* chat-button 위에 위치 */
             left: 50%;
             transform: translateX(-50%);
-            width: 500px;
+            width: 820px;
             height: 400px;
             background-color: white;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
