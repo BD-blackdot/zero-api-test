@@ -1,4 +1,4 @@
-// chat-button.js
+// public/chat-button.js
 
 // CSS 스타일을 추가하는 함수
 function addChatButtonStyles() {
@@ -22,7 +22,7 @@ function addChatButtonStyles() {
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
-            right: 80px;
+            right: 20px;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.5s ease-in-out;
@@ -153,7 +153,7 @@ function addWaitButton() {
     document.body.appendChild(button);
 }
 
-// 대기 버튼을 클릭했을 때 채팅 버튼으로 변환하는 함수
+// 대기 버튼을 클릭했을 때 채팅 입력 창으로 변환하는 함수
 function expandButton() {
     const waitButton = document.getElementById('wait-button');
     const chatInputContainer = document.getElementById('chat-input-container');
@@ -165,7 +165,7 @@ function expandButton() {
     waitButton.style.width = '820px';
     waitButton.style.borderRadius = '20px';
 
-    // 대기 버튼이 중앙으로 이동한 후 채팅 버튼으로 변환
+    // 대기 버튼이 중앙으로 이동한 후 채팅 입력 창으로 변환
     setTimeout(() => {
         waitButton.style.display = 'none';
         chatInputContainer.style.opacity = '1';
@@ -174,18 +174,18 @@ function expandButton() {
         const chatImage = chatInputContainer.querySelector('img');
         const chatInput = chatInputContainer.querySelector('input');
 
-        // 이미지와 텍스트를 나중에 나타나게 함
+        // 이미지와 입력 창을 나중에 나타나게 함
         setTimeout(() => {
             chatImage.style.opacity = '1';
-            chatText.style.opacity = '1';
+            chatInput.style.opacity = '1';
         }, 500);
     }, 500);
 }
 
-// 채팅 버튼을 추가하는 함수
-function addChatButton() {
-    const button = document.createElement('div');
-    button.id = 'chat-input-container';
+// 채팅 입력 창을 추가하는 함수
+function addChatInputContainer() {
+    const container = document.createElement('div');
+    container.id = 'chat-input-container';
     
     const logo = document.createElement('img');
     logo.src = 'https://bd-blackdot.github.io/zero-api-test/logo.png';
