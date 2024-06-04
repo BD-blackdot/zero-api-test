@@ -188,7 +188,7 @@ function expandButton() {
         setTimeout(() => {
             chatImage.style.opacity = '1';
             chatHint.style.opacity = '1';
-        }, 500);
+        }, 0);
     }, 500);
 }
 
