@@ -22,7 +22,7 @@ function addChatButtonStyles() {
             border-radius: 50%;
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 80px;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.5s ease-in-out;
@@ -46,7 +46,6 @@ function addChatButtonStyles() {
             transform: translateX(-50%);
             overflow: hidden;
             opacity: 0;
-            transition: all 0.5s ease-in-out;
         }
 
         #chat-input-container img {
