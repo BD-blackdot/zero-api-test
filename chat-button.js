@@ -35,7 +35,7 @@ function addChatButtonStyles() {
         }
 
         #chat-button img {
-            width: 296px; /* 너비 설정 */
+            width: 96px; /* 너비 설정 */
             height: 25.9px; /* 높이 설정 */
         }
 
